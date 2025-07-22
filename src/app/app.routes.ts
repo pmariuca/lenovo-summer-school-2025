@@ -7,9 +7,9 @@ import { AdminComponent } from './components/admin/admin.component';
 
 export const routes: Routes = [
     {path: '', component: LoginComponent},
-    {path: '/login', component: LoginComponent},
-    {path: '/home', component: HomeComponent},
-    {path: '/restaurant', component: RestaurantComponent},
-    {path: '/order', component: OrderComponent},
-    {path: '/admin', component: AdminComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'home', component: HomeComponent},
+    {path: 'restaurant', component: RestaurantComponent},
+    {path: 'order', component: OrderComponent},
+    {path: 'admin', component: AdminComponent},
 ];

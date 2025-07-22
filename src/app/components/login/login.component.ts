@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,10 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router:Router) {}
 
   ngOnInit(): void {
+    localStorage.removeItem('loginToken')
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -24,6 +26,8 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if (this.loginForm.valid) {
+      localStorage.setItem('loginToken', 'token')
+      this.router.navigate(['home']);
     }
   }
 }

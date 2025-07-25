@@ -1,0 +1,21 @@
+<div>
+  <div class="image-container">
+    <div class="widget-container">
+      <span class="title">{{title}}</span>
+      <span class="subtitle">{{subtitle}}</span>
+
+      @if (showAddress) {
+        <div class="address-picker">
+          <p-floatlabel variant="in" class="address-input" style="width: 80%; height: 36px">
+            <input pInputText id="in_label" [(ngModel)]="address" autocomplete="off" style="width: 100%; height: 36px" />
+            <label for="in_label">Address</label>
+          </p-floatlabel>
+
+          <p-button label="Submit" icon="pi pi-search" severity="warn" (onClick)="submitAddress()" />
+        </div>
+      }
+
+    </div>
+    <img src="hero_bg.jpg" alt="Hero image" class="hero-image">
+  </div>
+</div>

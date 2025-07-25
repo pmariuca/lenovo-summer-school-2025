@@ -1,0 +1,39 @@
+.image-container {
+  width: 100%;
+  max-height: 100vh;
+  overflow: hidden
+}
+
+.footer-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.data-container {
+  background: #232323;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 80px 160px;
+
+  & > div.data-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  & > div.data-links > span:hover {
+    text-decoration: underline;
+  }
+
+  & > div.data-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,25 @@
+<div id="header">
+  <div class="header-logo">
+    <app-foodvo-logo></app-foodvo-logo>
+    <span class="header-title">foodVo</span>
+  </div>
+
+  <div class="delivery-address">
+    <span class="bold">
+      Deliver to:
+    </span>
+    <span>
+      {{ address }}
+    </span>
+  </div>
+
+  <div class="button-container">
+    <p-button icon="pi pi-cart-plus" aria-label="Cart" severity="warn" [raised]="true" (onClick)="openCart()"/>
+    <p-button
+      label="{{ login ? 'Logout' : 'Login'}}"
+      [raised]="true"
+      icon="pi pi-user"
+      severity="warn"
+      (onClick)="redirectToLogin()"/>
+  </div>
+</div>

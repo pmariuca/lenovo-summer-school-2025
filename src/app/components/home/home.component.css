@@ -1,0 +1,35 @@
+#restaurants {
+  padding: 100px 160px;
+}
+
+.restaurants-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.restaurants-list ::ng-deep p-card {
+  flex: 0 0 calc(25% - 20px);
+  box-sizing: border-box;
+}
+
+.title {
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.card-img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+
+  & > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}

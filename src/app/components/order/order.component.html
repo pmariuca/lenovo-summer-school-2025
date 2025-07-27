@@ -1,1 +1,109 @@
-<p>order works!</p>
+<app-header address="address" [login]="false"></app-header>
+
+<form class="order-container" [formGroup]="deliveryFormGroup">
+  <div class="order-details">
+    <div class="contact-section">
+      <h3>Contact</h3>
+      <div>
+        <input
+          type="text"
+          pInputText
+          formControlName="contact"
+          pSize="large"
+          placeholder="Email of contact"
+        />
+        <div class="gdpr-section">
+          <p-checkbox inputId="gdpr" [binary]="true" />
+          <label for="gdpr" class="ml-2"> Email me with news and offers </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <h3>Delivery</h3>
+      <div class="name-container">
+        <input
+          type="text"
+          pInputText
+          formControlName="firstName"
+          pSize="large"
+          placeholder="First Name"
+        />
+        <input
+          type="text"
+          pInputText
+          formControlName="lastName"
+          pSize="large"
+          placeholder="Last Name"
+        />
+      </div>
+      <div class="address-section">
+        <input
+          type="text"
+          pInputText
+          formControlName="address"
+          pSize="large"
+          placeholder="Address"
+        />
+      </div>
+      <div class="address-section">
+        <input
+          type="text"
+          pInputText
+          formControlName="postalCode"
+          pSize="large"
+          placeholder="Postal Code"
+        />
+      </div>
+      <div class="gdpr-section">
+        <p-checkbox inputId="info" [binary]="true" />
+        <label for="info" class="ml-2">
+          Save this information for the next time
+        </label>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <h3>Payment</h3>
+      <div class="payment-section">
+        <p-radiobutton
+          name="payment"
+          value="cash"
+          inputId="cash"
+          formControlName="payment"
+        />
+        <label for="cash" class="ml-2">Cash</label>
+      </div>
+
+      <div class="payment-section">
+        <p-radiobutton
+          name="payment"
+          value="card"
+          inputId="card"
+          formControlName="payment"
+        />
+        <label for="card" class="ml-2">Card</label>
+      </div>
+
+      <div class="payment-section">
+        <p-radiobutton
+          name="payment"
+          value="paypal"
+          inputId="paypal"
+          formControlName="payment"
+        />
+        <label for="paypal" class="ml-2">Paypal</label>
+      </div>
+    </div>
+
+    <div class="submit-button">
+      <p-button label="Order" severity="warn" (onClick)="displayValues()" />
+    </div>
+  </div>
+
+  <div class="order-products"></div>
+</form>
+
+<!-- <button (click)="displayValues()">Aaaaa</button> -->
+
+<app-footer></app-footer>

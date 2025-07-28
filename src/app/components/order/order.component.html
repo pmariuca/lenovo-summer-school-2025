@@ -1,4 +1,4 @@
-<app-header address="address" [login]="false"></app-header>
+<app-header address="address" [login]="true"></app-header>
 
 <form class="order-container" [formGroup]="deliveryFormGroup">
   <div class="order-details">
@@ -102,10 +102,44 @@
   </div>
 
   <div class="order-products">
-    <div class="map-container"></div>
+    @for (product of orderBasket; track $index) {
+    <div class="product-container">
+      <div style="display: flex">
+        <div class="image-container">
+          <p-overlay-badge
+            [value]="product.quantity"
+            severity="danger"
+            class="inline-flex"
+          >
+            <p-avatar
+              class="p-overlay-badge"
+              image="https://primefaces.org/cdn/primeng/images/demo/avatar/walter.jpg"
+              size="xlarge"
+            />
+          </p-overlay-badge>
+        </div>
+        <p>{{ product.name }}</p>
+      </div>
+      <p>${{ product.price }}</p>
+    </div>
+    }
+    <div class="product-container">
+      <p>Subtotal * {{ orderBasket.length }} items</p>
+      <p>$ {{ getTotalValue() }}</p>
+    </div>
+
+    <div class="product-container">
+      <p>Shipping</p>
+      <p>FREE</p>
+    </div>
+
+    <div class="product-container">
+      <p>Total</p>
+      <p>USD ${{ getTotalValue() }}</p>
+    </div>
+
+    <!-- <div class="map-container"></div> -->
   </div>
 </form>
-
-<!-- <button (click)="displayValues()">Aaaaa</button> -->
 
 <app-footer></app-footer>

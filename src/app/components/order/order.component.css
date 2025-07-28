@@ -1,6 +1,6 @@
 .order-container {
   display: flex;
-  margin-bottom: 100px;
+  margin: 100px 0;
 }
 
 .order-details {
@@ -57,4 +57,19 @@
   height: 300px;
   border: 1px solid white;
   margin-left: 40px;
+}
+
+.image-container {
+  width: fit-content;
+}
+
+.product-container {
+  margin-bottom: 36px;
+  margin-left: 36px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-container p {
+  margin-left: 15px;
 }

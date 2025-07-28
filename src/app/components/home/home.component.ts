@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, ChangeDetectorRef} from '@angular/core';
-import {HeaderComponent} from '../header/header.component';
-import {HeroSectionComponent} from '../hero-section/hero-section.component';
-import {FooterComponent} from '../footer/footer.component';
-import {Card} from 'primeng/card';
-import {Button} from 'primeng/button';
-import {RestaurantService} from '../../services/restaurant.service';
+import { Component, OnInit } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
+import { HeroSectionComponent } from '../hero-section/hero-section.component';
+import { FooterComponent } from '../footer/footer.component';
+import { Card } from 'primeng/card';
+import { Button } from 'primeng/button';
+import { RestaurantService } from '../../services/restaurant.service';
+import { Restaurant } from '../interfaces/restaurant.interface';
 
 @Component({
   selector: 'app-home',
@@ -13,35 +14,38 @@ import {RestaurantService} from '../../services/restaurant.service';
     HeroSectionComponent,
     FooterComponent,
     Card,
-    Button
+    Button,
   ],
   templateUrl: './home.component.html',
   standalone: true,
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements OnInit {
   login: Boolean = false;
   address: String = '';
-  restaurants: any[] = [];
+  restaurants: Restaurant[] = [];
 
-  constructor(private cdr: ChangeDetectorRef, private restaurantService: RestaurantService) {}
+  constructor(private restaurantService: RestaurantService) {}
 
-  async ngAfterViewInit(): Promise<void> {
+  ngOnInit(): void {
     this.login = !!localStorage.getItem('loginToken');
 
-    this.restaurants = this.restaurantService.getMockRestaurants()
-    this.cdr.detectChanges();
-
-    const res = await this.restaurantService.getRestaurants()
-    console.log(res)
+    this.restaurantService.getMockRestaurantsHTTP().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.restaurants = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   handleAddress(address: String) {
     this.address = address;
-    this.cdr.detectChanges();
   }
 
   visitRestaurant(_id: any) {
-    console.log('visit', _id)
+    console.log('visit', _id);
   }
 }

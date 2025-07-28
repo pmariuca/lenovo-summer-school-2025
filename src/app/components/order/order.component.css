@@ -51,3 +51,10 @@
 .submit-button p-button {
   width: 300px;
 }
+
+.map-container {
+  width: 300px;
+  height: 300px;
+  border: 1px solid white;
+  margin-left: 40px;
+}

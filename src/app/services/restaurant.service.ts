@@ -1,3 +1,4 @@
+import { Restaurant } from './../components/interfaces/restaurant.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
@@ -111,7 +112,7 @@ export class RestaurantService {
   }
 
   getMockRestaurantsHTTP() {
-    return this.http.get(
+    return this.http.get<Restaurant[]>(
       'https://mocki.io/v1/9fca2d65-721b-4a93-bf46-b78e5a1682b3'
     );
   }

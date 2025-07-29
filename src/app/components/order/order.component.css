@@ -1,0 +1,75 @@
+.order-container {
+  display: flex;
+  margin: 100px 0;
+}
+
+.order-details {
+  flex: 1;
+  margin-left: 100px;
+  border-right: 1px solid white;
+}
+
+.order-products {
+  flex: 1;
+  margin-right: 100px;
+}
+
+.contact-section input {
+  width: 300px;
+}
+
+.gdpr-section {
+  margin-top: 20px;
+}
+
+.name-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.address-section {
+  margin-top: 16px;
+}
+
+.address-section input {
+  width: 620px;
+}
+
+.payment-section {
+  margin-bottom: 10px;
+}
+
+.payment-section label {
+  margin-left: 7px;
+}
+
+.submit-button {
+  margin-top: 20px;
+}
+
+.submit-button p-button {
+  width: 300px;
+}
+
+.map-container {
+  width: 300px;
+  height: 300px;
+  border: 1px solid white;
+  margin-left: 40px;
+}
+
+.image-container {
+  width: fit-content;
+}
+
+.product-container {
+  margin-bottom: 36px;
+  margin-left: 36px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-container p {
+  margin-left: 15px;
+}

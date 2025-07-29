@@ -1,0 +1,61 @@
+#products {
+    padding: 100px 160px;
+}
+
+.product-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-list ::ng-deep p-card {
+  box-sizing: border-box;
+}
+
+.title {
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 40px;
+}
+
+.card-img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+
+  & > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+i {
+    margin-top: 10px;
+}
+
+.button-plus{
+  font-size: 25px; 
+  margin-top:0
+}
+
+.button-plus:hover{
+  cursor: pointer;
+  color: orange;
+}
+
+.button-minus{
+  font-size: 25px; 
+  margin-top:0; 
+  margin-right: 20px
+}
+
+.button-minus:hover{
+  cursor: pointer;
+  color: orange;
+}

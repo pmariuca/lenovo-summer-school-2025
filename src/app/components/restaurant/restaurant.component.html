@@ -1,1 +1,46 @@
-<p>restaurant works!</p>
+<div>
+  <app-header [address]="address" [login]="login"></app-header>
+  <app-hero-section
+    [title]="title"
+    [startHours]="startHours"
+    [endHours]="endHours">
+  </app-hero-section>
+</div>
+
+<div id="products">
+    <span class="title">Check out our deals</span>
+
+    <div class="product-list">
+      @for (product of restaurantData.dishes; track product.id; ) {
+        <p-card [style]="{ width: '350px', overflow: 'hidden' }">
+          <ng-template #header>
+            <div class="card-img">
+              <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+            </div>
+          </ng-template>
+          <ng-template #title> 
+            {{ product.name }}
+            <br>
+            <i class="pi pi-dollar" style="font-size: 20px;"></i> 
+            {{ product.price }}
+         </ng-template>
+          <ng-template #subtitle>
+            <span> {{ product.description }} </span>
+          </ng-template>
+          <ng-template #footer>
+            <div style="display: flex; align-items:center; gap:10px">
+                <p-button label="Add to order" severity="warn" (click)="addToOrder()"/>
+                <i class="pi pi-cart-plus button-plus" (click)="incrementProduct(product.id)"></i> 
+                <i class="pi pi-cart-minus button-minus" (click)="decrementProduct(product.id)"></i>
+                <span>Total: {{ productTotal[(+product.id) - 1] }}</span>
+            </div>
+          </ng-template>
+        </p-card>
+      }
+    </div>
+    
+
+</div>
+
+
+<app-footer></app-footer>

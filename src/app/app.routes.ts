@@ -11,7 +11,8 @@ export const routes: Routes = [
     {path: '', redirectTo: 'login' , pathMatch: 'full'},
     {path: 'login', component: LoginComponent},
     {path: 'home', component: HomeComponent, canActivate:[authGuard]},
-    {path: 'restaurant', component: RestaurantComponent, canActivate: [authGuard]},
+    {path: 'restaurant', component: HomeComponent, canActivate: [authGuard]},
+    { path: 'restaurant/:id', component: RestaurantComponent, canActivate: [authGuard] },
     {path: 'order', component: OrderComponent, canActivate: [authGuard]},
     {path: 'admin', component: AdminComponent, canActivate: [authGuard]},
 ];

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { HeroSectionComponent } from '../hero-section/hero-section.component';
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   address: String = '';
   restaurants: Restaurant[] = [];
 
-  constructor(private restaurantService: RestaurantService) {}
+  constructor(private restaurantService: RestaurantService, private router: Router) {}
 
   ngOnInit(): void {
     this.login = !!localStorage.getItem('loginToken');
@@ -43,6 +44,12 @@ export class HomeComponent implements OnInit {
 
   handleAddress(address: String) {
     this.address = address;
+    localStorage.setItem('address', address.toString())
+    this.cdr.detectChanges();
+  }
+
+  visitRestaurant(_id: any) {
+    this.router.navigate(['restaurant', _id])
   }
 
   visitRestaurant(_id: any) {

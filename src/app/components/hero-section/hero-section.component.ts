@@ -23,6 +23,8 @@ export class HeroSectionComponent {
   @Input() title: String = '';
   @Input() subtitle: String = '';
   @Input() showAddress: boolean = false;
+  @Input() startHours: string = '';
+  @Input() endHours: string = '';
 
   @Output() addressSubmitted = new EventEmitter<String>();
 

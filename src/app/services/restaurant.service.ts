@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
+import { Product } from '../models/Product';
+import { Restaurant } from '../models/Restaurant';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,7 @@ export class RestaurantService {
               price: 18
             },
             {
-              id: "1",
+              id: "2",
               name: "Tiramisu",
               description: "Traditional coffee-flavored Italian dessert",
               price: 8
@@ -140,5 +142,28 @@ export class RestaurantService {
 
   getMockRestaurants() {    
     return this.mockRestaurants[0].data;
+  }
+
+
+  getRestaurantById(_id: string): Restaurant {
+  const found = this.mockRestaurants[0].data
+    .find(r => r._id === _id);
+
+  if (!found) {
+    throw new Error(`Restaurant with id ${_id} not found`);
+  }
+
+  return found;
+}
+
+  getProducts(_id: string): Product[] {
+    
+    return this.mockRestaurants[0].data.find((restaurant) => restaurant._id == _id)?.dishes ?? []
+
+  }
+
+  getRestaurantName(_id: string): string {
+    return this.mockRestaurants[0].data.find((restaurant) => restaurant._id == _id)?.name ?? ''
+
   }
 }

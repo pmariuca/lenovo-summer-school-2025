@@ -5,6 +5,7 @@ import {FooterComponent} from '../footer/footer.component';
 import {Card} from 'primeng/card';
 import {Button} from 'primeng/button';
 import {RestaurantService} from '../../services/restaurant.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements AfterViewInit {
   address: String = '';
   restaurants: any[] = [];
 
-  constructor(private cdr: ChangeDetectorRef, private restaurantService: RestaurantService) {}
+  constructor(private cdr: ChangeDetectorRef, private restaurantService: RestaurantService, private router: Router) {}
 
   async ngAfterViewInit(): Promise<void> {
     this.login = !!localStorage.getItem('loginToken');
@@ -38,10 +39,11 @@ export class HomeComponent implements AfterViewInit {
 
   handleAddress(address: String) {
     this.address = address;
+    localStorage.setItem('address', address.toString())
     this.cdr.detectChanges();
   }
 
   visitRestaurant(_id: any) {
-    console.log('visit', _id)
+    this.router.navigate(['restaurant', _id])
   }
 }

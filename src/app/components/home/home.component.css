@@ -4,12 +4,13 @@
 
 .restaurants-list {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 20px;
 }
 
 .restaurants-list ::ng-deep p-card {
-  flex: 0 0 calc(25% - 20px);
   box-sizing: border-box;
 }
 

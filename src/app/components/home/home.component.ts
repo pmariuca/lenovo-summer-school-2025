@@ -36,8 +36,7 @@ export class HomeComponent implements OnInit {
 
     this.restaurantService.getMockRestaurantsHTTP().subscribe({
       next: (res) => {
-        console.log(res);
-        this.restaurants = res;
+        this.restaurants = res[0].data;        
       },
       error: (err) => {
         console.error(err);
@@ -51,6 +50,7 @@ export class HomeComponent implements OnInit {
   }
 
   visitRestaurant(_id: any) {
-    this.router.navigate(['restaurant', _id]);
+    this.router.navigate(['restaurant', _id])
   }
+
 }

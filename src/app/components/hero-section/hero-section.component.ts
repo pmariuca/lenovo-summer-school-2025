@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgOptimizedImage} from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {FormsModule} from '@angular/forms';
@@ -11,7 +11,8 @@ import {Button} from 'primeng/button';
     FloatLabel,
     InputText,
     FormsModule,
-    Button
+    Button,
+    NgIf
   ],
   templateUrl: './hero-section.component.html',
   standalone: true,

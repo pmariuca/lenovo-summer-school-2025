@@ -26,12 +26,9 @@ import { Restaurant } from '../../models/Restaurant';
   templateUrl: './restaurant.component.html',
   styleUrl: './restaurant.component.css',
 })
-export class RestaurantComponent implements AfterViewInit, OnInit {
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private restaurantService: RestaurantService,
-    private router: Router
-  ) {}
+export class RestaurantComponent implements OnInit {
+
+  constructor(private cdr: ChangeDetectorRef, private restaurantService: RestaurantService, private router: Router) {}
 
   LSBasket: any = [];
   address: string = '';
@@ -56,34 +53,37 @@ export class RestaurantComponent implements AfterViewInit, OnInit {
   resId: string = '';
   title: string = '';
 
-  ngOnInit(): void {}
 
-  async ngAfterViewInit(): Promise<void> {
-    this.address = localStorage.getItem('address') ?? '';
+   ngOnInit() {
+    this.address = localStorage.getItem('address') ?? '';  
     this.login = !!localStorage.getItem('loginToken');
+    this.resId = this.router.url.split('/').pop() ?? ''    
 
-    this.cdr.detectChanges();
+    this.restaurantService.getMockRestaurantsHTTP().subscribe(res => {
+      const list = res[0].data;
+      const found = list.find(r => r._id === this.resId);
 
-    this.resId = this.router.url.split('/').pop() ?? '';
+      if (found) {
 
-    this.restaurantData = await this.restaurantService.getRestaurantById(
-      this.resId
-    );
+        this.restaurantData = found;
 
-    this.title = this.restaurantData.name;
-    this.products = this.restaurantData.dishes;
-    this.startHours = this.restaurantData.startHours.substring(11, 16);
-    this.endHours = this.restaurantData.endHours.substring(11, 16);
+        this.title = this.restaurantData.name
+        this.products = this.restaurantData.dishes
+        this.startHours = this.restaurantData.startHours.substring(11,16)
+        this.endHours = this.restaurantData.endHours.substring(11,16)
 
-    // this.title = await this.restaurantService.getRestaurantName(this.resId)
-    // this.products = await this.restaurantService.getProducts(this.resId)
 
-    for (let i = 0; i < this.products.length; i++) {
-      this.productTotal[i] = 0;
-      this.productQuantity[i] = 0;
-    }
+        for(let i = 0; i<this.products.length; i++){
+          this.productTotal[i] = 0
+          this.productQuantity[i] = 0
+        }
 
-    console.log(this.products);
+      } else {
+        console.error(`No restaurant matches ID ${this.resId}`);
+      }
+    });
+
+
   }
 
   incrementProduct(id: string) {
@@ -96,10 +96,7 @@ export class RestaurantComponent implements AfterViewInit, OnInit {
   decrementProduct(id: string) {
     const price = this.products.find((p) => p.id === id)?.price ?? 0;
 
-    this.productTotal[parseInt(id) - 1] = Math.max(
-      0,
-      this.productTotal[parseInt(id) - 1] - price
-    );
+    this.productTotal[parseInt(id) - 1] = Math.max(0, this.productTotal[parseInt(id) - 1] - price);
     this.productQuantity[parseInt(id) - 1] -= 1;
   }
 

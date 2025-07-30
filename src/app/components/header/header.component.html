@@ -12,15 +12,14 @@
   </div>
 
   <div class="button-container">
-    <p-button icon="pi pi-shopping-cart" aria-label="Cart" severity="warn" [raised]="true" (onClick)="openCart()"/>
-
     <p-button
-      icon="pi pi-cart-plus"
+      icon="pi pi-shopping-cart"
       aria-label="Cart"
       severity="warn"
       [raised]="true"
       (onClick)="openCart()"
     />
+
     <p-button
       label="{{ login ? 'Logout' : 'Login' }}"
       [raised]="true"

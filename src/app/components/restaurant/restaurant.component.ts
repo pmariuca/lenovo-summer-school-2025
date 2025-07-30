@@ -1,10 +1,15 @@
-import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import {HeaderComponent} from '../header/header.component';
-import {HeroSectionComponent} from '../hero-section/hero-section.component';
-import {FooterComponent} from '../footer/footer.component';
-import {Card} from 'primeng/card';
-import {Button} from 'primeng/button';
-import {RestaurantService} from '../../services/restaurant.service';
+import {
+  Component,
+  AfterViewInit,
+  ChangeDetectorRef,
+  OnInit,
+} from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
+import { HeroSectionComponent } from '../hero-section/hero-section.component';
+import { FooterComponent } from '../footer/footer.component';
+import { Card } from 'primeng/card';
+import { Button } from 'primeng/button';
+import { RestaurantService } from '../../services/restaurant.service';
 import { Router } from '@angular/router';
 import { Product } from '../../models/Product';
 import { Restaurant } from '../../models/Restaurant';
@@ -16,15 +21,19 @@ import { Restaurant } from '../../models/Restaurant';
     HeroSectionComponent,
     FooterComponent,
     Card,
-    Button
+    Button,
   ],
   templateUrl: './restaurant.component.html',
-  styleUrl: './restaurant.component.css'
+  styleUrl: './restaurant.component.css',
 })
-export class RestaurantComponent implements AfterViewInit {
+export class RestaurantComponent implements AfterViewInit, OnInit {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private restaurantService: RestaurantService,
+    private router: Router
+  ) {}
 
-  constructor(private cdr: ChangeDetectorRef, private restaurantService: RestaurantService, private router: Router) {}
-
+  LSBasket: any = [];
   address: string = '';
   login: Boolean = false;
   products: Product[] = [];
@@ -35,69 +44,81 @@ export class RestaurantComponent implements AfterViewInit {
     location: { long: 0, lat: 0 },
     startHours: '',
     endHours: '',
-    dishes: []
+    dishes: [],
   };
 
-  startHours: string = ''
-  endHours: string = ''
+  startHours: string = '';
+  endHours: string = '';
 
-  productTotal: number[] = []
-  productQuantity: number[] = []
+  productTotal: number[] = [];
+  productQuantity: number[] = [];
 
   resId: string = '';
   title: string = '';
 
+  ngOnInit(): void {
+    this.LSBasket = JSON.parse(localStorage.getItem('basket') || '[]');
+    console.log(this.LSBasket);
+  }
+
   async ngAfterViewInit(): Promise<void> {
-    this.address = localStorage.getItem('address') ?? '';  
+    this.address = localStorage.getItem('address') ?? '';
     this.login = !!localStorage.getItem('loginToken');
 
-    
-    this.cdr.detectChanges()
-    
-    
-    this.resId = this.router.url.split('/').pop() ?? ''    
+    this.cdr.detectChanges();
 
+    this.resId = this.router.url.split('/').pop() ?? '';
 
-    this.restaurantData = await this.restaurantService.getRestaurantById(this.resId)
+    this.restaurantData = await this.restaurantService.getRestaurantById(
+      this.resId
+    );
 
-    this.title = this.restaurantData.name
-    this.products = this.restaurantData.dishes
-    this.startHours = this.restaurantData.startHours.substring(11,16)
-    this.endHours = this.restaurantData.endHours.substring(11,16)
+    this.title = this.restaurantData.name;
+    this.products = this.restaurantData.dishes;
+    this.startHours = this.restaurantData.startHours.substring(11, 16);
+    this.endHours = this.restaurantData.endHours.substring(11, 16);
 
     // this.title = await this.restaurantService.getRestaurantName(this.resId)
     // this.products = await this.restaurantService.getProducts(this.resId)
 
-    
-    for(let i = 0; i<this.products.length; i++){
-      this.productTotal[i] = 0
-      this.productQuantity[i] = 0
+    for (let i = 0; i < this.products.length; i++) {
+      this.productTotal[i] = 0;
+      this.productQuantity[i] = 0;
     }
 
-
-
     console.log(this.products);
-    
-
-
   }
 
   incrementProduct(id: string) {
-    const price = this.products.find(p => p.id === id)?.price ?? 0;
+    const price = this.products.find((p) => p.id === id)?.price ?? 0;
 
     this.productTotal[parseInt(id) - 1] += price;
     this.productQuantity[parseInt(id) - 1] += 1;
   }
 
   decrementProduct(id: string) {
-    const price = this.products.find(p => p.id === id)?.price ?? 0;
+    const price = this.products.find((p) => p.id === id)?.price ?? 0;
 
-    this.productTotal[parseInt(id) - 1] = Math.max(0, this.productTotal[parseInt(id) - 1] - price);
+    this.productTotal[parseInt(id) - 1] = Math.max(
+      0,
+      this.productTotal[parseInt(id) - 1] - price
+    );
     this.productQuantity[parseInt(id) - 1] += 1;
   }
 
-  addToOrder(){
-    
-  }
+  addToOrder(product: Product) {
+    console.log(product);
+    console.log(this.productQuantity[Number.parseInt(product.id) - 1]);
 
+    const orderProduct = {
+      ...product,
+      quantity: this.productQuantity[Number.parseInt(product.id) - 1],
+    };
+
+    this.LSBasket.push(orderProduct);
+
+    localStorage.setItem('basket', JSON.stringify(this.LSBasket));
+
+    console.log(localStorage.getItem('basket'));
+  }
 }

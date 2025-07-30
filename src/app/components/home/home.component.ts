@@ -26,7 +26,10 @@ export class HomeComponent implements OnInit {
   address: String = '';
   restaurants: Restaurant[] = [];
 
-  constructor(private restaurantService: RestaurantService, private router: Router) {}
+  constructor(
+    private restaurantService: RestaurantService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.login = !!localStorage.getItem('loginToken');
@@ -44,15 +47,10 @@ export class HomeComponent implements OnInit {
 
   handleAddress(address: String) {
     this.address = address;
-    localStorage.setItem('address', address.toString())
-    this.cdr.detectChanges();
+    localStorage.setItem('address', address.toString());
   }
 
   visitRestaurant(_id: any) {
-    this.router.navigate(['restaurant', _id])
-  }
-
-  visitRestaurant(_id: any) {
-    console.log('visit', _id);
+    this.router.navigate(['restaurant', _id]);
   }
 }

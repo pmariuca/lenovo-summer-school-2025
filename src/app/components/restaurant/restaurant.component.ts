@@ -56,10 +56,7 @@ export class RestaurantComponent implements AfterViewInit, OnInit {
   resId: string = '';
   title: string = '';
 
-  ngOnInit(): void {
-    this.LSBasket = JSON.parse(localStorage.getItem('basket') || '[]');
-    console.log(this.LSBasket);
-  }
+  ngOnInit(): void {}
 
   async ngAfterViewInit(): Promise<void> {
     this.address = localStorage.getItem('address') ?? '';
@@ -103,22 +100,23 @@ export class RestaurantComponent implements AfterViewInit, OnInit {
       0,
       this.productTotal[parseInt(id) - 1] - price
     );
-    this.productQuantity[parseInt(id) - 1] += 1;
+    this.productQuantity[parseInt(id) - 1] -= 1;
   }
 
   addToOrder(product: Product) {
-    console.log(product);
-    console.log(this.productQuantity[Number.parseInt(product.id) - 1]);
-
     const orderProduct = {
       ...product,
       quantity: this.productQuantity[Number.parseInt(product.id) - 1],
     };
 
-    this.LSBasket.push(orderProduct);
+    const basket = JSON.parse(localStorage.getItem('basket') || '[]');
 
-    localStorage.setItem('basket', JSON.stringify(this.LSBasket));
+    if (orderProduct.quantity > 0) {
+      (basket as Array<any>).push(orderProduct);
 
-    console.log(localStorage.getItem('basket'));
+      localStorage.setItem('basket', JSON.stringify(basket));
+    }
+
+    console.log(basket as Array<any>);
   }
 }

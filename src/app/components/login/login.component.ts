@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -7,26 +13,27 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   imports: [NgIf, CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private router:Router) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
-    localStorage.removeItem('loginToken')
+    localStorage.removeItem('loginToken');
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   onSubmit(): void {
     this.submitted = true;
     if (this.loginForm.valid) {
-      localStorage.setItem('loginToken', 'token')
+      localStorage.setItem('loginToken', 'token');
+      localStorage.setItem('basket', JSON.stringify([]));
       this.router.navigate(['home']);
     }
   }

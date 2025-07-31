@@ -11,6 +11,26 @@
 <div id="products">
   <span class="title">Check out our deals</span>
 
+    <div class="card flex justify-center" *ngIf="showAddItems" id="addModal">
+        <p-button (click)="showDialog()" label="Add products" />
+        <p-dialog header="Tema pentru acasa :)" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+            <span class="p-text-secondary block mb-8">Add a product</span>
+            <div class="flex items-center gap-4 mb-4">
+                <label for="camp1" class="font-semibold w-24">camp1</label>
+                <input pInputText id="camp1" class="flex-auto" autocomplete="off" />
+            </div>
+            <div class="flex items-center gap-4 mb-8">
+                <label for="camp2" class="font-semibold w-24">camp2</label>
+                <input pInputText id="camp2" class="flex-auto" autocomplete="off" />
+            </div>
+            Etc
+            <div class="flex justify-end gap-2">
+                <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+                <p-button label="Add" (click)="visible = false" />
+            </div>
+        </p-dialog>
+    </div>
+
   <div class="product-list">
     @for (product of restaurantData.dishes; track product.id; ) {
     <p-card [style]="{ width: '350px', overflow: 'hidden' }">

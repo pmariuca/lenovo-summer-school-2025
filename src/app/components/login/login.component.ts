@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.removeItem('loginToken');
+    localStorage.removeItem('userName');
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       localStorage.setItem('loginToken', 'token');
       localStorage.setItem('basket', JSON.stringify([]));
+      localStorage.setItem('userName', this.loginForm.value.email.split("@")[0])
       this.router.navigate(['home']);
     }
   }

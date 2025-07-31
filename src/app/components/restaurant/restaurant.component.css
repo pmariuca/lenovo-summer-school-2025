@@ -1,5 +1,8 @@
 #products {
     padding: 100px 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .product-list {
@@ -58,4 +61,8 @@ i {
 .button-minus:hover{
   cursor: pointer;
   color: orange;
+}
+
+#addModal{
+  margin-bottom: 20px;
 }

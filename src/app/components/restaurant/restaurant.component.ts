@@ -13,7 +13,11 @@ import { RestaurantService } from '../../services/restaurant.service';
 import { Router } from '@angular/router';
 import { Product } from '../../models/Product';
 import { Restaurant } from '../../models/Restaurant';
-
+import { NgIf } from '@angular/common';
+import { DialogModule } from 'primeng/dialog';
+import { Dialog } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-restaurant',
   imports: [
@@ -22,6 +26,11 @@ import { Restaurant } from '../../models/Restaurant';
     FooterComponent,
     Card,
     Button,
+    NgIf,
+    DialogModule,
+    Dialog, 
+    ButtonModule, 
+    InputTextModule
   ],
   templateUrl: './restaurant.component.html',
   styleUrl: './restaurant.component.css',
@@ -54,6 +63,10 @@ export class RestaurantComponent implements OnInit {
   title: string = '';
 
 
+  showAddItems: boolean = false;
+
+  visible: boolean = false;
+
    ngOnInit() {
     this.address = localStorage.getItem('address') ?? '';  
     this.login = !!localStorage.getItem('loginToken');
@@ -77,6 +90,10 @@ export class RestaurantComponent implements OnInit {
           this.productTotal[i] = 0
           this.productQuantity[i] = 0
         }
+
+
+        if(this.title.replace(/\s+/g, '').toLowerCase().includes(localStorage.getItem('userName') || ''))
+          this.showAddItems = true
 
       } else {
         console.error(`No restaurant matches ID ${this.resId}`);
@@ -116,4 +133,8 @@ export class RestaurantComponent implements OnInit {
 
     console.log(basket as Array<any>);
   }
+
+  showDialog() {
+        this.visible = true;
+    }
 }

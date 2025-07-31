@@ -28,8 +28,8 @@ import { InputTextModule } from 'primeng/inputtext';
     Button,
     NgIf,
     DialogModule,
-    Dialog, 
-    ButtonModule, 
+    Dialog,
+    ButtonModule,
     InputTextModule
   ],
   templateUrl: './restaurant.component.html',
@@ -68,12 +68,12 @@ export class RestaurantComponent implements OnInit {
   visible: boolean = false;
 
    ngOnInit() {
-    this.address = localStorage.getItem('address') ?? '';  
+    this.address = localStorage.getItem('address') ?? '';
     this.login = !!localStorage.getItem('loginToken');
-    this.resId = this.router.url.split('/').pop() ?? ''    
+    this.resId = this.router.url.split('/').pop() ?? ''
 
     this.restaurantService.getMockRestaurantsHTTP().subscribe(res => {
-      const list = res[0].data;
+      const list = res;
       const found = list.find(r => r._id === this.resId);
 
       if (found) {

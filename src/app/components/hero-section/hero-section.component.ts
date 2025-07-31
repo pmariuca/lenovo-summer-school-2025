@@ -19,7 +19,7 @@ import {Button} from 'primeng/button';
   styleUrl: './hero-section.component.css'
 })
 export class HeroSectionComponent {
-  address: String = '';
+  address: string = '';
 
   @Input() title: String = '';
   @Input() subtitle: String = '';
@@ -27,7 +27,7 @@ export class HeroSectionComponent {
   @Input() startHours: string = '';
   @Input() endHours: string = '';
 
-  @Output() addressSubmitted = new EventEmitter<String>();
+  @Output() addressSubmitted = new EventEmitter<string>();
 
   submitAddress(): void {
     this.addressSubmitted.emit(this.address);

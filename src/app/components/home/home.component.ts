@@ -23,7 +23,7 @@ import { Restaurant } from '../interfaces/restaurant.interface';
 })
 export class HomeComponent implements OnInit {
   login: Boolean = false;
-  address: String = '';
+  address: string = '';
   restaurants: Restaurant[] = [];
 
   constructor(
@@ -34,9 +34,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.login = !!localStorage.getItem('loginToken');
 
+    this.address = localStorage.getItem('address') || '';
+
     this.restaurantService.getMockRestaurantsHTTP().subscribe({
       next: (res) => {
-        this.restaurants = res[0].data;        
+        this.restaurants = res;
       },
       error: (err) => {
         console.error(err);
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  handleAddress(address: String) {
+  handleAddress(address: string) {
     this.address = address;
     localStorage.setItem('address', address.toString());
   }

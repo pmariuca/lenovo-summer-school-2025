@@ -66,6 +66,7 @@ export class RestaurantComponent implements OnInit {
   showAddItems: boolean = false;
 
   visible: boolean = false;
+  photoPath: string = '/dishes/'
 
    ngOnInit() {
     this.address = localStorage.getItem('address') ?? '';

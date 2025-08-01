@@ -37,8 +37,8 @@
       <ng-template #header>
         <div class="card-img">
           <img
-            alt="Card"
-            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+            [alt]=`${photoPath}${restaurantData.id}_${product.id}.jpg`
+            [src]=`${photoPath}${restaurantData.id}_${product.id}.jpg`
           />
         </div>
       </ng-template>

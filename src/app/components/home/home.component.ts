@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   login: Boolean = false;
   address: string = '';
   restaurants: Restaurant[] = [];
+  photoPath = '/restaurant/'
 
   constructor(
     private restaurantService: RestaurantService,
@@ -51,8 +52,8 @@ export class HomeComponent implements OnInit {
     localStorage.setItem('address', address.toString());
   }
 
-  visitRestaurant(_id: any) {
-    this.router.navigate(['restaurant', _id])
+  visitRestaurant(id: any) {
+    this.router.navigate(['restaurant', id])
   }
 
 }

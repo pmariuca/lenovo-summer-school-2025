@@ -10,11 +10,11 @@
     <span class="title">Featured Restaurants</span>
 
     <div class="restaurants-list">
-      @for (restaurant of restaurants; track restaurant._id) {
+      @for (restaurant of restaurants; track restaurant.id) {
         <p-card [style]="{ width: '350px', overflow: 'hidden' }">
           <ng-template #header>
             <div class="card-img">
-              <img alt="Card" [src]="'/restaurant/' + restaurant._id" />
+              <img [alt]=`${photoPath}${restaurant.id}.jpg` [src]=`${photoPath}${restaurant.id}.jpg`  />
             </div>
           </ng-template>
           <ng-template #title> {{ restaurant.name }} </ng-template>
@@ -22,7 +22,7 @@
             <i class="pi pi-star-fill"></i> {{ restaurant.rating }}
           </ng-template>
           <ng-template #footer>
-            <p-button label="Order now" severity="warn" (onClick)="visitRestaurant(restaurant._id)" />
+            <p-button label="Order now" severity="warn" (onClick)="visitRestaurant(restaurant.id)" />
           </ng-template>
         </p-card>
       }

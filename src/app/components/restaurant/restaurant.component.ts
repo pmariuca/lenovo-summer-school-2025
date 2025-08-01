@@ -44,7 +44,7 @@ export class RestaurantComponent implements OnInit {
   login: Boolean = false;
   products: Product[] = [];
   restaurantData: Restaurant = {
-    _id: '',
+    id: '',
     name: '',
     rating: 0,
     location: { long: 0, lat: 0 },
@@ -74,7 +74,7 @@ export class RestaurantComponent implements OnInit {
 
     this.restaurantService.getMockRestaurantsHTTP().subscribe(res => {
       const list = res;
-      const found = list.find(r => r._id === this.resId);
+      const found = list.find(r => r.id === this.resId);
 
       if (found) {
 
